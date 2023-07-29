@@ -9,7 +9,6 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 app.set('view engine','ejs')
 app.use(express.static('views'))
-const proxy = 'http://172.16.2.11:3128'
 const configuration = new Configuration({
   apiKey: process.env.API_KEY,
 });
@@ -36,7 +35,6 @@ app.post('/contact',(req,res)=>{
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS_KEY
       },
-      proxy:proxy
     });
 
     const mailOptions ={
@@ -64,7 +62,6 @@ app.post('/generate', async(req,res)=>{
     prompt: req.body.image_name,
     n: 1,
     size: "512x512",
-    proxy:proxy
   });
   var image_url = response.data.data[0].url;
   res.render('../views/generate',{image_url:image_url})
@@ -77,7 +74,6 @@ app.post('/chat',async (req,res)=>{
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [{role: "user", content:query}],
-    proxy:proxy
   });
   var info=completion.data.choices[0].message.content;
   res.render('../views/chat',{info:info})
