@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>CHAT</h2>
+    <form action="/chat" method="post">
+        <label for="text">Ask the AI</label>
+        <input type="text" name="chat_text" id="chat" placeholder="Ask">
+        <button type="submit">Send</button>
+    </form>
+    <p><%= locals.info %></p>
+</body>
+</html>
